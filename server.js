@@ -128,7 +128,7 @@ function teneoChat(sessionHandler) {
      console.log(_stringify(req));
      console.log(_stringify(body));
       var post = qs.parse(body);
-      const callingPhoneNumber = post.from;
+      const callingPhoneNumber =  req.query["from"];
       const input = post.text;
 
       console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
@@ -137,7 +137,7 @@ function teneoChat(sessionHandler) {
       const teneoSessionId = sessionHandler.getSession(callingPhoneNumber);
 
       // Send the user's input from the SMS to Teneo, and obtain a response
-      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': input, 'channel': 'nexmo-sms', 'phoneNumber': callingPhoneNumber});
+      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': input, 'channel': 'vonage-whatsapp', 'phoneNumber': callingPhoneNumber});
 
       // Stored engine sessionid for this caller
       sessionHandler.setSession(callingPhoneNumber, teneoResponse.sessionId);
