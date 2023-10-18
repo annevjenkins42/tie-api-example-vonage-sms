@@ -128,8 +128,8 @@ function teneoChat(sessionHandler) {
      //console.log(_stringify(req));
      console.log(_stringify(body));
       var post = qs.parse(body);
-      const callingPhoneNumber =  req.query["from"];
-      const input = post.text;
+      const callingPhoneNumber =  req.body["from"];
+      const input = req.body["text"];
        console.log("post = " + _stringify(post));
        console.log("input = " + input);
       console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
