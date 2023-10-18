@@ -130,7 +130,8 @@ function teneoChat(sessionHandler) {
       var post = qs.parse(body);
       const callingPhoneNumber =  req.query["from"];
       const input = post.text;
-
+       console.log("post = " + post);
+       console.log("input = " + input);
       console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
 
       // Check if we have stored an engine sessionid for this caller
