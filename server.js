@@ -128,7 +128,7 @@ function teneoChat(sessionHandler) {
      //console.log(_stringify(req));
      console.log(_stringify(body));
       var post = qs.parse(body);
-     const obj = JSON.parse(json);
+     const obj = JSON.parse(body);
       const callingPhoneNumber = obj.from;
       const input = obj.text;
        
