@@ -128,10 +128,10 @@ function teneoChat(sessionHandler) {
      console.log(_stringify(req));
      console.log(_stringify(body));
       var post = qs.parse(body);
-      const callingPhoneNumber = post.msisdn;
+      const callingPhoneNumber = post.from;
       const input = post.text;
 
-      console.log("SMS from " + callingPhoneNumber + " was: " + input);
+      console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
 
       // Check if we have stored an engine sessionid for this caller
       const teneoSessionId = sessionHandler.getSession(callingPhoneNumber);
@@ -143,7 +143,7 @@ function teneoChat(sessionHandler) {
       sessionHandler.setSession(callingPhoneNumber, teneoResponse.sessionId);
 
       // Send text response to user via Nexmo SMS
-      sendSMS(callingPhoneNumber, teneoResponse.output.text)
+      //sendSMS(callingPhoneNumber, teneoResponse.output.text)
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end('');
