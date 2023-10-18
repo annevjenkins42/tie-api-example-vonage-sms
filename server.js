@@ -95,6 +95,24 @@ function sendSMS(phoneNumber, message) {
 	});
 }
 
+function _stringify (o)
+{
+  const decircularise = () =>
+  {
+    const seen = new WeakSet();
+    return (key,val) => 
+    {
+      if( typeof val === "object" && val !== null )
+      {
+        if( seen.has(val) ) return;
+        seen.add(val);
+      }
+      return val;
+    };
+  };
+  
+  return JSON.stringify( o, decircularise() );
+}
 
 // Handle incoming Nexmo message
 function teneoChat(sessionHandler) {
@@ -107,7 +125,8 @@ function teneoChat(sessionHandler) {
     });
 
     req.on('end', async function () {
-
+     console.log(_stringify(req));
+     console.log(_stringify(body));
       var post = qs.parse(body);
       const callingPhoneNumber = post.msisdn;
       const input = post.text;
