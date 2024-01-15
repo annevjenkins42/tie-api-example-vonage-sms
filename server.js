@@ -131,16 +131,24 @@ function teneoChat(sessionHandler) {
      const obj = JSON.parse(body);
       const callingPhoneNumber = obj.from;
       const input = obj.text;
+      const mediaUrl = '';
        
        console.log("post = " + _stringify(post));
        console.log("input = " + input);
+      if(input===undefined) {
+	      mediaUrl = obj.image;
+	      if(mediaUrl!==undefined) {
+		      mediaUrl = obj.image.url;
+		      input= onj.image.caption;
+	      }
+      }      
       console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
 
       // Check if we have stored an engine sessionid for this caller
       const teneoSessionId = sessionHandler.getSession(callingPhoneNumber);
 
       // Send the user's input from the SMS to Teneo, and obtain a response
-      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': input, 'channel': 'vonage-whatsapp', 'phoneNumber': callingPhoneNumber});
+      const teneoResponse = await teneoApi.sendInput(teneoSessionId, { 'text': input, 'channel': 'vonage-whatsapp', 'phoneNumber': callingPhoneNumber, 'mediaUrl':mediaUrl});
       console.log("response="+teneoResponse.output.text);
       console.log(_stringify(teneoResponse.output));
       // Stored engine sessionid for this caller
