@@ -139,7 +139,7 @@ function teneoChat(sessionHandler) {
 	      mediaUrl = obj.image;
 	      if(mediaUrl!==undefined) {
 		      mediaUrl = obj.image.url;
-		      input= onj.image.caption;
+		      input= obj.image.caption;
 	      }
       }      
       console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
