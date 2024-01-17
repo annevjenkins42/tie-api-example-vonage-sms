@@ -142,7 +142,7 @@ function teneoChat(sessionHandler) {
 		      input= obj.image.caption;
 	      }
       }      
-      console.log("WhatsApp from " + callingPhoneNumber + " was: " + input);
+      console.log("WhatsApp from " + callingPhoneNumber + " was: " + input + " with mediaUrl= "+ mediaUrl);
 
       // Check if we have stored an engine sessionid for this caller
       const teneoSessionId = sessionHandler.getSession(callingPhoneNumber);
