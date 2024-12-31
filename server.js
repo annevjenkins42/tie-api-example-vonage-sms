@@ -77,30 +77,36 @@ function sendNexmoSMSMessage() {
 
 // Send a SMS
 function sendSMS(phoneNumber, message) {
-	var postData = JSON.stringify({
-	    'from' : config.nexmoNumber,
-	    'to'   : phoneNumber,
-	     'message_type': 'text',
-	     'text'	: message,
-	     'channel' : 'whatsapp'
-	});
-
-	var options = {
-	  hostname: 'messages-sandbox.nexmo.com',
-	  port: 443,
-	  path: '/v1/messages',
-	  method: 'POST',
-	  authorization : {
-        	username: 'd7a7df85',
-        	password: '5LGQImJ4i8NxWfHW'
-    	  },	
-	  headers: {
-	       'Content-Type': 'application/x-www-form-urlencoded',
-	       'Content-Length': postData.length
-	     }
-	};
 	
-	console.log('postData = ' + postData);
+const from_number = '14157386102';
+const to_number = phoneNumber;
+const data = JSON.stringify({
+  "from": { "type": "whatsapp", "number": from_number },
+  "to": { "type": "whatsapp", "number": to_number },
+  "message": {
+    "content": {
+      "type": "text",
+      "text":  message
+    }
+  }
+});
+	const https = require('https');
+
+const options = {
+  hostname: 'messages-sandbox.nexmo.com',
+  port: 443,
+  path: '/v0.1/messages',
+  method: 'POST',
+  authorization: {
+    username: 'd7a7df85',
+    password: '5LGQImJ4i8NxWfHW'
+  },
+  headers: {
+    'Authorization': 'Basic ' + btoa(`${user}:${password}`),
+    'Content-Type': 'application/json'
+  }
+};
+	console.log('postData = ' + data);
 
 	var req2 = https.request(options, (res2) => {
 	  console.log('statusCode:', res2.statusCode);
@@ -115,7 +121,7 @@ function sendSMS(phoneNumber, message) {
 	  console.error(e);
 	});
 	
-	req2.write(postData);
+	req2.write(data);
 	req2.end();
 	/*nexmoSMSRequest.post('https://messages-sandbox.nexmo.com/v1/messages', {
 		json: {
