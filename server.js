@@ -15,6 +15,7 @@
  */
 
 const http = require('http');
+const https = require('https');
 const express = require('express');
 const qs = require('querystring');
 const TIE = require('@artificialsolutions/tie-api-client');
@@ -76,7 +77,15 @@ function sendNexmoSMSMessage() {
 
 // Send a SMS
 function sendSMS(phoneNumber, message) {
+	var postData = JSON.stringify({
+	    'from' : config.nexmoNumber,
+	    'to'   : phoneNumber,
+	     'message_type': 'text',
+	     'text'	: message,
+	     'channel' : 'whatsapp'
+	});
 
+	console.log('postData = ' + postData);
 	nexmoSMSRequest.post('https://messages-sandbox.nexmo.com/v1/messages', {
 		json: {
 			from: config.nexmoNumber,
