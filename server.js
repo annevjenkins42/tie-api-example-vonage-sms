@@ -86,7 +86,7 @@ function sendSMS(phoneNumber, message) {
 	});
 
 	var options = {
-	  hostname: 'https://messages-sandbox.nexmo.com',
+	  hostname: 'messages-sandbox.nexmo.com',
 	  port: 443,
 	  path: '/v1/messages',
 	  method: 'POST',
