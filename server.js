@@ -77,13 +77,15 @@ function sendNexmoSMSMessage() {
 // Send a SMS
 function sendSMS(phoneNumber, message) {
 
-	nexmoSMSRequest.post('https://rest.nexmo.com/sms/json', {
+	nexmoSMSRequest.post('https://messages-sandbox.nexmo.com/v1/messages', {
 		json: {
 			from: config.nexmoNumber,
 			to: phoneNumber,
+			message_type: "text",
 			api_key: config.nexmoApiKey,
 			api_secret: config.nexmoApiSecret,
-			text: message
+			text: message,
+			channel: "whatsapp"
 		}
 	}, (error, response, body) => {
 		if (error) {
