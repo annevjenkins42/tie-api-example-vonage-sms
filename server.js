@@ -85,8 +85,35 @@ function sendSMS(phoneNumber, message) {
 	     'channel' : 'whatsapp'
 	});
 
+	var options = {
+	  hostname: 'https://messages-sandbox.nexmo.com',
+	  port: 443,
+	  path: '/v1/messages',
+	  method: 'POST',
+	  headers: {
+	       'Content-Type': 'application/x-www-form-urlencoded',
+	       'Content-Length': postData.length
+	     }
+	};
+	
 	console.log('postData = ' + postData);
-	nexmoSMSRequest.post('https://messages-sandbox.nexmo.com/v1/messages', {
+
+	var req2 = https.request(options, (res2) => {
+	  console.log('statusCode:', res2.statusCode);
+	  console.log('headers:', res2.headers);
+	
+	  res2.on('data', (d) => {
+	    process.stdout.write(d);
+	  });
+	});
+	
+	req2.on('error', (e) => {
+	  console.error(e);
+	});
+	
+	req2.write(postData);
+	req2.end();
+	/*nexmoSMSRequest.post('https://messages-sandbox.nexmo.com/v1/messages', {
 		json: {
 			from: config.nexmoNumber,
 			to: phoneNumber,
@@ -103,7 +130,7 @@ function sendSMS(phoneNumber, message) {
 		}
 		console.log('Status code from Nexmo SMS Send: ${response.statusCode}')
 		console.log('Sent message <<' + message + '>> to number <<' + phoneNumber + '>>');
-	});
+	});*/
 }
 
 function _stringify (o)
