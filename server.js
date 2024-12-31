@@ -157,7 +157,7 @@ function teneoChat(sessionHandler) {
       sessionHandler.setSession(callingPhoneNumber, teneoResponse.sessionId);
 
       // Send text response to user via Nexmo SMS
-      //sendSMS(callingPhoneNumber, teneoResponse.output.text)
+      sendSMS(callingPhoneNumber, teneoResponse.output.text)
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end('');
