@@ -93,7 +93,7 @@ function sendSMS(phoneNumber, message) {
 	  authorization : {
         	username: 'd7a7df85',
         	password: '5LGQImJ4i8NxWfHW'
-    	  }	
+    	  },	
 	  headers: {
 	       'Content-Type': 'application/x-www-form-urlencoded',
 	       'Content-Length': postData.length
