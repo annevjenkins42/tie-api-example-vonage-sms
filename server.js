@@ -91,15 +91,16 @@ const data = JSON.stringify({
   }
 });
 	const https = require('https');
-
+const user = 'd7a7df85';
+const password = '5LGQImJ4i8NxWfHW';
 const options = {
   hostname: 'messages-sandbox.nexmo.com',
   port: 443,
   path: '/v0.1/messages',
   method: 'POST',
   authorization: {
-    username: 'd7a7df85',
-    password: '5LGQImJ4i8NxWfHW'
+    username: user,
+    password: password
   },
   headers: {
     'Authorization': 'Basic ' + btoa(`${user}:${password}`),
