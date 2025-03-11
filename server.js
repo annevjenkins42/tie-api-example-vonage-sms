@@ -91,8 +91,8 @@ const data = JSON.stringify({
   }
 });
 	const https = require('https');
-const user = nexmoApiKey || 'd7a7df85';
-const password = nexmoApiSecret || '5LGQImJ4i8NxWfHW';
+const user = config.nexmoApiKey || 'd7a7df85';
+const password = config.nexmoApiSecret || '5LGQImJ4i8NxWfHW';
 const options = {
   hostname: 'messages-sandbox.nexmo.com',
   port: 443,
