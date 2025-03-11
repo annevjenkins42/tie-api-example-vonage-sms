@@ -75,10 +75,10 @@ function sendNexmoSMSMessage() {
 }
 
 
-// Send a SMS
+// Send a WhatsApp
 function sendSMS(phoneNumber, message) {
 	
-const from_number = '14157386102';
+const from_number = config.nexmoNumber || '14157386102';
 const to_number = phoneNumber;
 const data = JSON.stringify({
   "from": { "type": "whatsapp", "number": from_number },
@@ -91,8 +91,8 @@ const data = JSON.stringify({
   }
 });
 	const https = require('https');
-const user = 'd7a7df85';
-const password = '5LGQImJ4i8NxWfHW';
+const user = nexmoApiKey || 'd7a7df85';
+const password = nexmoApiSecret || '5LGQImJ4i8NxWfHW';
 const options = {
   hostname: 'messages-sandbox.nexmo.com',
   port: 443,
